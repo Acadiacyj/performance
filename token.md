@@ -27,6 +27,16 @@ Token是服务端生成的一串字符串，以作客户端进行请求的一个
 8.凡是需要验证的地方都要带上该token，然后服务器端验证token，成功返回所需要的结果，失败返回错误信息，让他重新登录。其中服务器上token设置一个有效期，每次APP请求的时候都验证token和有效期。
 
 
-参考文献：1.https://www.jianshu.com/p/24825a2683e6
-         2.https://www.cnblogs.com/xuxinstyle/p/9675541.html
-         3.https://www.cnblogs.com/lufeiludaima/p/pz20190203.html
+参考文献：
+
+理论
+
+1.https://www.jianshu.com/p/24825a2683e6
+            
+2.https://www.cnblogs.com/xuxinstyle/p/9675541.html
+
+3.https://www.cnblogs.com/lufeiludaima/p/pz20190203.html
+
+代码实现
+
+1.https://www.cnblogs.com/chriskwok/p/12599130.html
