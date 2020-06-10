@@ -75,8 +75,18 @@ HttpOnly: 告知浏览器不允许通过脚本document.cookie去更改这个值�
 
 secure: 安全标志，指定后，只有在使用SSL链接时候才能发送到服务器，如果是http链接则不会传递该信息。就算设置了secure 属性也并不代表他人不能看到你机器本地保存的 cookie 信息，所以不要把重要信息放cookie就对了服务器端设置
 
+### 要点
+如果给cookie设置一个过去的时间，浏览器会立即删除该cookie
+
+domain项必须有两个点，因此不能设置为localhost:
+
+
+
+
 参考文献：
 
 1.https://www.cnblogs.com/8023-CHD/p/11067141.html
 
 2.https://blog.csdn.net/weixin_42217767/article/details/92760353
+
+3.https://blog.csdn.net/zhangquan_zone/article/details/77627899
