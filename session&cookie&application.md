@@ -51,9 +51,32 @@ isRequestedSessionIdValid()：是不是有效的sessionID
 当浏览器的某窗口关闭后关闭后不会立即清除session，而是有一个时间间隔(可设置)，当超过这个时间间隔则清除session，而在此间隔内访问这个sessionid则重新计时。
 
 ## cookie
+由于HTTP协议是无状态的，而服务器端的业务必须是要有状态的。Cookie诞生的最初目的是为了存储web中的状态信息，以方便服务器端使用。它保存在客户端，当我们使用自己的电脑通过浏览器进行访问网页的时候，服务器就会生成一个证书并返回给我的浏览器并写入我们的本地电脑。这个证书就是cookie。一般来说cookie都是服务器端写入客户端的纯文本文件。Cookie 必须有浏览器的支持，在浏览器中设置阻止cookie，那么服务器端就不能写入cookie 到客户端了。大多数浏览器都支持cookie。
 
+### 运作流程
+服务器向客户端发送cookie，浏览器将cookie保存，之后每次http请求浏览器都会将cookie发送给服务器端
+
+### 属性
+服务器端像客户端发送Cookie是通过HTTP响应报文实现的，在Set-Cookie中设置需要像客户端发送的cookie，例：Set-Cookie: "name=？;domain=？;path=？;expires=？;HttpOnly;secure"，其中name=value是必选项。
+
+name:一个唯一确定的cookie名称。通常来讲cookie的名称是不区分大小写的
+
+
+value:存储在cookie中的字符串值。最好为cookie的name和value进行url编码
+domain:cookie对于哪个域是有效的。所有向该域发送的请求中都会包含这个cookie信息。这个值可以包含子域(如：yq.aliyun.com)，也可以不包含它(如：.aliyun.com，则对于aliyun.com的所有子域都有效)
+
+path: 表示这个cookie影响到的路径，浏览器跟会根据这项配置，像指定域中匹配的路径发送cookie
+
+expires:失效时间，表示cookie何时应该被删除的时间戳(也就是，何时应该停止向服务器发送这个cookie)。如果不设置这个时间戳，浏览器会在页面关闭时即将删除所有cookie；不过也可以自己设置删除时间。这个值是GMT时间格式，如果客户端和服务器端时间不一致，使用expires就会存在偏差
+
+max-age: 与expires作用相同，用来告诉浏览器此cookie多久过期（单位是秒），而不是一个固定的时间点。正常情况下，max-age的优先级高于expires
+
+HttpOnly: 告知浏览器不允许通过脚本document.cookie去更改这个值，同样这个值在document.cookie中也不可见。但在http请求张仍然会携带这个cookie。注意这个值虽然在脚本中不可获取，但仍然在浏览器安装目录中以文件形式存在。这项设置通常在服务器端设置
+
+secure: 安全标志，指定后，只有在使用SSL链接时候才能发送到服务器，如果是http链接则不会传递该信息。就算设置了secure 属性也并不代表他人不能看到你机器本地保存的 cookie 信息，所以不要把重要信息放cookie就对了服务器端设置
 
 参考文献：
+
 1.https://www.cnblogs.com/8023-CHD/p/11067141.html
 
 2.https://blog.csdn.net/weixin_42217767/article/details/92760353
