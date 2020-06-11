@@ -89,8 +89,40 @@ secure: 安全标志，指定后，只有在使用SSL链接时候才能发送到
 domain项必须有两个点，因此不能设置为localhost:
 
 ## application
+Application和Activity,Service一样,是Android框架的一个系统组件，当Android程序启动时系统会创建一Application 对象，用来存储系统的一些信息
 
+### 与session区别
+1、对象不同。Application用于保存所有用户的公共数据信息，Session用于保存每个用户的专用信息；
 
+2、信息量大小不同。Application适用于任何大小的数据，Session只适用于少量、简单的数据；
+
+3、保存时间不同。Application保存期贯穿于整个应用程序的生命期，Session保存期一般是用户活动时间+一段延迟时间，大多数情况下为20分钟；
+
+4、应用范围不同。Application适用于所有用户，Session只用于单个用户；
+
+5、session是每个用户都有一个，application是所有用户公用一个。
+
+### 生命周期
+1、onCreate（） 程序创建的时候执行
+
+2、onTerminate（） 程序终止的时候执行
+
+3、onLowMemory（） 低内存的时候执行
+
+4、onConfigurationChanged（Configuration newConfig） 配置改变时触发这个方法。
+
+5、onTrimMemory（int level）程序在进行内存清理时执行
+
+### 应用场景
+1、常驻内存的应用 
+一些常驻内存的应用，比如Launcher、安全中心、电话等，在用户使用过要退出的时候，
+需要调用OnTrimMemory来及时释放用户使用的时候所产生的多余的内存资源：比如动态生成的View、
+图片缓存、Fragment等。
+
+2、有后台Service运行的应用 
+这些应用不是常驻内存的，意味着可以被任务管理器杀掉，但是在某些场景下用户不会去杀。 
+这类应用包括：音乐、下载等。用户退出UI界面后，音乐还在继续播放，下载程序还在运行。
+这时候音乐应该释放部分UI资源和Cache。
 
 参考文献：
 
@@ -103,3 +135,9 @@ domain项必须有两个点，因此不能设置为localhost:
 4.https://blog.csdn.net/u014753892/article/details/52821268?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase
 
 5.https://blog.csdn.net/echojson/article/details/79701795
+
+6.https://blog.csdn.net/Spring_East/article/details/84337878?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522159186412619724843359027%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=159186412619724843359027&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-1-84337878.first_rank_ecpm_v3_pc_rank_v2&utm_term=application
+
+7.https://blog.csdn.net/qq_34115898/article/details/83276519?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522159186412619724843359027%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=159186412619724843359027&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-2-83276519.first_rank_ecpm_v3_pc_rank_v2&utm_term=application
+
+8.https://blog.csdn.net/weixin_34026276/article/details/91430357
