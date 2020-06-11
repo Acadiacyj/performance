@@ -54,7 +54,15 @@ isRequestedSessionIdValid()：是不是有效的sessionID
 由于HTTP协议是无状态的，而服务器端的业务必须是要有状态的。Cookie诞生的最初目的是为了存储web中的状态信息，以方便服务器端使用。它保存在客户端，当我们使用自己的电脑通过浏览器进行访问网页的时候，服务器就会生成一个证书并返回给我的浏览器并写入我们的本地电脑。这个证书就是cookie。一般来说cookie都是服务器端写入客户端的纯文本文件。Cookie 必须有浏览器的支持，在浏览器中设置阻止cookie，那么服务器端就不能写入cookie 到客户端了。大多数浏览器都支持cookie。
 
 ### 运作流程
-服务器向客户端发送cookie，浏览器将cookie保存，之后每次http请求浏览器都会将cookie发送给服务器端
+（1）客户端在浏览器的地址栏中键入Web服务器的URL，浏览器发送读取网页的请求。
+
+（2）服务器接收到请求后，产生一个Set-Cookie报头，放在HTTP报文中一起回传客户端，发起一次会话。
+
+（3）客户端收到应答后，若要继续该次会话，则将Set-Cook-ie中的内容取出，形成一个Cookie.txt文件储存在客户端计算机里。
+
+（4）当客户端再次向服务器发出请求时，浏览器先在电脑里寻找对应该网站的Cookie.txt文件。如果找到，则根据此Cookie.txt产生Cookie报头，放在HTTP请求报文中发给服务器。
+
+（5）服务器接收到包含Cookie报头的请求，检索其Cookie中与用户有关的信息，生成一个客户端所请示的页面应答传递给客户端。 浏览器的每一次网页请求，都可以传递已存在的Cookie文件，例如，浏览器的打开或刷新网页操作。
 
 ### 属性
 服务器端像客户端发送Cookie是通过HTTP响应报文实现的，在Set-Cookie中设置需要像客户端发送的cookie，例：Set-Cookie: "name=？;domain=？;path=？;expires=？;HttpOnly;secure"，其中name=value是必选项。
@@ -80,6 +88,7 @@ secure: 安全标志，指定后，只有在使用SSL链接时候才能发送到
 
 domain项必须有两个点，因此不能设置为localhost:
 
+## application
 
 
 
@@ -90,3 +99,7 @@ domain项必须有两个点，因此不能设置为localhost:
 2.https://blog.csdn.net/weixin_42217767/article/details/92760353
 
 3.https://blog.csdn.net/zhangquan_zone/article/details/77627899
+
+4.https://blog.csdn.net/u014753892/article/details/52821268?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase
+
+5.https://blog.csdn.net/echojson/article/details/79701795
